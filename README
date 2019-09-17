@@ -1,0 +1,47 @@
+# TODO: setup master/slave
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.backend.SentinelCache',
+        'LOCATION': [
+            '127.0.0.1:26379',
+        ],
+	'OPTIONS': {
+            'MASTER_NAME': 'mymaster',
+        }
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.backend.RedisCache',
+        'LOCATION': '127.0.0.1:6379'
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.backend.RedisCache',
+        'LOCATION': '127.0.0.1:6379',
+	'OPTIONS': {
+            'DB': 2,
+            'PASSWORD': 'secret',
+            'MAX_CONNECTIONS': 10,
+	}
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.backend.RedisCache',
+        'LOCATION': [
+            '127.0.0.1:6379',
+            '127.0.0.1:6380',
+            '127.0.0.1:6381',
+            '127.0.0.1:6382',
+        ],
+	'OPTIONS': {
+            'MASTER_HOST': '127.0.0.1:6379',
+	}
+    }
+}
